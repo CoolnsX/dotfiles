@@ -1,1 +1,3 @@
 # dotfiles
+
+copy these folders to .config directory...

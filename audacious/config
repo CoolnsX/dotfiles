@@ -4,10 +4,10 @@ generic_title_format=${title}
 shuffle=TRUE
 
 [qtui]
-column_widths=25,25,528,175,50,234,175,25,100,25,75,275,275,275,75
+column_widths=25,25,515,175,50,234,175,25,100,25,75,275,275,275,75
 infoarea_visible=FALSE
 menu_visible=FALSE
-player_height=753
+player_height=757
 player_width=1266
 playlist_columns=playing title length
 
@@ -23,5 +23,5 @@ vumeter-qt=494,302,288,192
 
 [vumeter]
 display_legend=FALSE
-falloff=70
-peak_hold_time=0.1
+falloff=50
+peak_hold_time=1

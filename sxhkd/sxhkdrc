@@ -4,7 +4,7 @@
 
 #file manager
 super + e
-	thunar
+	pcmanfm	
 
 #dunst notification
 super + y
@@ -16,11 +16,11 @@ super + p
 
 # terminal emulator
 super + Return
-	xfce4-terminal
+	st
 
 # program launcher
 super + q
-	dmenu_run
+	dmenu_run -h 25 -l 10
 
 #task manager
 ctrl  + shift + Escape
@@ -32,19 +32,19 @@ super + @Escape
 
 # lockscreen
 ctrl + L 
-	light-locker-command -l	
+	$HOME/.config/bspwm/screenlock.sh
 
 # browser
 super + a
 	google-chrome-stable
 
-# kazam 
+# scrot ss selected window
 super + Print
-	kazam
+	maim -sB -d 1 ~/Pictures/$(date +%s).png && notify-send "Selected window's screenshot taken"
 
-# kazam ss full screen
+# scrot ss full screen
 Print
-	kazam -f
+	maim ~/Pictures/$(date +%s).png && notify-send "screenshot taken"
 
 #
 # bspwm hotkeys
@@ -166,7 +166,24 @@ XF86AudioPrev
 
 # stop
 XF86AudioStop
-    audacious -s
+    audtool shutdown
+
+# Alternative buttons..
+# play/pause
+F9
+    audacious -t
+
+# next
+F12
+    audacious -f
+
+# previous
+F11
+    audacious -r
+
+# stop
+F10
+    audtool shutdown
 
 # volume control
 XF86AudioLowerVolume
@@ -181,4 +198,8 @@ XF86MonBrightnessDown
 	xbacklight -dec 5
 XF86MonBrightnessUp
 	xbacklight -inc 5
+
+#restart system
+XF86Launch1
+	reboot
 

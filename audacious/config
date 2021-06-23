@@ -7,7 +7,7 @@ shuffle=TRUE
 column_widths=25,25,515,175,50,234,175,25,100,25,75,275,275,275,75
 infoarea_visible=FALSE
 menu_visible=FALSE
-player_height=757
+player_height=758
 player_width=1266
 playlist_columns=playing title length
 

@@ -34,6 +34,18 @@ super + @Escape
 ctrl + L 
 	$HOME/.config/bspwm/screenlock.sh
 
+# toggle bluetooth on/off and autoconnect to last device
+super + F6
+	$HOME/.config/bspwm/bluetooth
+	
+# toggle wifi on/off
+super + F5
+	$HOME/.config/bspwm/wifi
+
+# toggle wifi on/off
+super + F7
+	$HOME/.config/bspwm/pi.sh
+
 # browser
 super + a
 	google-chrome-stable
@@ -166,23 +178,6 @@ XF86AudioPrev
 
 # stop
 XF86AudioStop
-    audtool shutdown
-
-# Alternative buttons..
-# play/pause
-F9
-    audacious -t
-
-# next
-F12
-    audacious -f
-
-# previous
-F11
-    audacious -r
-
-# stop
-F10
     audtool shutdown
 
 # volume control

@@ -18,13 +18,13 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #44
+background = #00
 x1 = #ff1a1a
 x2 = #0099ff
-background-alt = #44
+background-alt = #00
 ;foreground = ${xrdb:color7:#222}
 foreground = #ff
-foreground-alt = #000
+foreground-alt = #555
 primary = #ffb52a
 secondary = #00ff00
 alert = #bd2c40
@@ -33,8 +33,8 @@ alert = #bd2c40
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 23
-;offset-x = 1%
-;offset-y = 1%
+;offset-x = 0%
+;offset-y = 0%
 radius = 0
 fixed-center = false
 enable-ipc = true
@@ -45,7 +45,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 3
 border-color = #00000000
 
 padding-left = 0
@@ -154,7 +154,7 @@ label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
-; focused = Active workspace on focused monitor
+; ocused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
@@ -456,4 +456,4 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
-; vim:ft=dosini
+; vim:ft=dosinif

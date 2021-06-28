@@ -5,9 +5,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 #Startup applications
 $HOME/.config/bspwm/launch.sh
 /usr/bin/dunst &
-feh --bg-scale $HOME/wallpapers/1192044.jpg &
+feh --bg-scale $HOME/wallpapers/2.jpg &
 xss-lock $HOME/.config/bspwm/screenlock.sh &
-picom &
+picom --vsync &
 #$HOME/.config/bspwm/startup.sh
 
 bspc monitor -d I II III IV V

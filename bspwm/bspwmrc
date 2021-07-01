@@ -3,12 +3,12 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 #Startup applications
-$HOME/.config/bspwm/launch.sh
-/usr/bin/dunst &
-feh --bg-scale $HOME/wallpapers/2.jpg &
-xss-lock $HOME/.config/bspwm/screenlock.sh &
 picom --vsync &
-#$HOME/.config/bspwm/startup.sh
+xwallpaper --stretch $HOME/wallpapers/7.jpg &
+$HOME/scripts/launch.sh &
+/usr/bin/dunst &
+xss-lock $HOME/scripts/screenlock.sh &
+#$HOME/scripts/startup.sh
 
 bspc monitor -d I II III IV V
 bspc config border_width         2

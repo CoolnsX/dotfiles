@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$(printf "lock\\nsuspend\\nhibernate\\nlogout\\nreboot\\npoweroff" | dmenu -l 10 -p "⏻ ")" in
+	lock) $HOME/scripts/screenlock.sh ;;
+	suspend) systemctl suspend ;;
+	hibernate) systemctl hibernate ;;
+	logout) bspc quit ;;
+	reboot) systemctl reboot ;;
+	poweroff) systemctl poweroff ;;
+esac

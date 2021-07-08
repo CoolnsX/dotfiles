@@ -4,10 +4,10 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 #Startup applications
 picom --vsync &
-xwallpaper --stretch $HOME/wallpapers/7.jpg &
-$HOME/scripts/launch.sh &
+xwallpaper --stretch $HOME/wallpapers/8.jpg &
+$HOME/.config/bspwm/launch.sh &
 /usr/bin/dunst &
-xss-lock $HOME/scripts/screenlock.sh &
+xss-lock $HOME/.config/bspwm/screenlock.sh &
 #$HOME/scripts/startup.sh
 
 bspc monitor -d I II III IV V

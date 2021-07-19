@@ -18,6 +18,11 @@ alias ncss="nvim ~/.config/sxhkd/sxhkdrc"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#00F5FF,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=#00F5FF,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=#00F5FF
+
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000

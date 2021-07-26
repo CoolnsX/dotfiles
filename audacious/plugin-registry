@@ -636,7 +636,7 @@ domain audacious-plugins
 priority 0
 about 0
 config 0
-enabled 0
+enabled 1
 vis /usr/lib/audacious/Visualization/vumeter-qt.so
 stamp 1615448284
 version 48
@@ -666,7 +666,7 @@ domain audacious-plugins
 priority 0
 about 0
 config 0
-enabled 1
+enabled 0
 general /usr/lib/audacious/General/delete-files.so
 stamp 1615448284
 version 48

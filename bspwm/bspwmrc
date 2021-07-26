@@ -4,10 +4,10 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 #Startup applications
 picom --vsync &
-xwallpaper --stretch $HOME/wallpapers/8.jpg &
+xwallpaper --stretch $HOME/wallpapers/13.jpg &
 $HOME/.config/bspwm/launch.sh &
 /usr/bin/dunst &
-xss-lock $HOME/.config/bspwm/screenlock.sh &
+xautolock -time 5 -locker $HOME/.config/bspwm/screenlock.sh &
 #$HOME/scripts/startup.sh
 
 bspc monitor -d I II III IV V
@@ -25,7 +25,5 @@ bspc rule -a Google-chrome desktop='^1' follow=on
 bspc rule -a Audacious desktop='^5'
 bspc rule -a Pavucontrol desktop='^5' follow=on
 bspc rule -a Pcmanfm desktop='^3' follow=on 
-bspc rule -a Transmission-gtk desktop='^5' follow=on
+bspc rule -a Transmission-gtk desktop='^3' follow=on
 bspc rule -a Code desktop='^4' follow=on
-
-

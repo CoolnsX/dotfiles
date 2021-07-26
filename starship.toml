@@ -7,7 +7,7 @@ success_symbol = "[└─>](bold green)"
 error_symbol = "[└─>](bold red)"
 
 [cmd_duration]
-min_time = 20 
+min_time = 70 
 format = " took [$duration]($style)"
 
 [directory]

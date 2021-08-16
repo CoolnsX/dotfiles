@@ -1,6 +1,6 @@
 # ~/.config/starship.toml
 
-format = "[┌──](bold green)$all"
+format = "[┌─](bold green)$all"
 
 [character]
 success_symbol = "[└─>](bold green)"
@@ -60,5 +60,3 @@ style = "bold green"
 [username]
 style_user = "bold fg:#ffa500"
 show_always = true
-
-

@@ -1,13 +1,15 @@
 #! /bin/sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
+xsetroot -cursor_name left_ptr &
 
 #Startup applications
 picom --vsync &
-xwallpaper --stretch $HOME/wallpapers/13.jpg &
+xwallpaper --stretch $HOME/wallpapers/7.jpg &
 $HOME/.config/bspwm/launch.sh &
 /usr/bin/dunst &
-xautolock -time 5 -locker $HOME/.config/bspwm/screenlock.sh &
+xset s 300 &
+xss-lock $HOME/.config/bspwm/screenlock.sh &
 #$HOME/scripts/startup.sh
 
 bspc monitor -d I II III IV V
@@ -21,7 +23,7 @@ bspc config gapless_monocle      true
 
 
 bspc rule -a st-256color desktop='^2' follow=on
-bspc rule -a Google-chrome desktop='^1' follow=on
+#bspc rule -a Google-chrome desktop='^1' follow=on
 bspc rule -a Audacious desktop='^5'
 bspc rule -a Pavucontrol desktop='^5' follow=on
 bspc rule -a Pcmanfm desktop='^3' follow=on 

@@ -2,11 +2,11 @@
 # wm independent hotkeys
 #
 
-#file manager
+# File manager
 super + e
 	pcmanfm	
 
-#Visual Studio code
+# Visual Studio code
 super + y
 	code
 	
@@ -14,15 +14,15 @@ super + y
 super + p
 	pavucontrol
 
-# terminal emulator
+# Terminal emulator
 super + Return
 	st
 
-# program launcher
+# Program launcher
 super + q
 	dmenu_run_history -p RUN:
 
-#task manager
+# Task manager
 ctrl  + shift + Escape
 	xfce4-taskmanager
 
@@ -30,33 +30,33 @@ ctrl  + shift + Escape
 super + @Escape
 	pkill -USR1 -x sxhkd
 
-# lockscreen
+# Lockscreen
 ctrl + L 
 	$HOME/.config/bspwm/screenlock.sh
 
-# toggle bluetooth on/off and autoconnect to last device
+# Toggle bluetooth on/off and autoconnect to last device
 super + F6
 	$HOME/.config/bspwm/bluetooth
 	
-# toggle wifi on/off
+# Toggle wifi on/off
 super + F5
 	$HOME/.config/bspwm/wifi
 
-# toggle wifi on/off
+# Toggle picom vsync
 super + F7
 	$HOME/.config/bspwm/pi.sh
 
-# browser
+# Web Browser
 super + a
 	google-chrome-stable
 
-# scrot ss selected window
+# Screenshot selected window
 super + Print
-	maim -sB -d 1 ~/Pictures/$(date +%s).png && notify-send "Selected window's screenshot taken"
+	maim -sB -d 1 ~/Pictures/$(date +%T_%F).png && notify-send "Selected window's screenshot taken"
 
-# scrot ss full screen
+# Screenshot full screen
 Print
-	maim ~/Pictures/$(date +%s).png && notify-send "screenshot taken"
+	maim ~/Pictures/$(date +%T_%F).png && notify-send "screenshot taken"
 
 #
 # bspwm hotkeys
@@ -193,6 +193,10 @@ super + F11
 super + F10
     audtool shutdown
 
+# Interactive Screenshot and copy to clipboard
+super + F1
+    maim -s -d 1 | xclip -selection clipboard -t image/png && notify-send "screenshot copied to clipboard"
+
 # volume control
 XF86AudioLowerVolume
 	pamixer --allow-boost -d 5
@@ -200,19 +204,21 @@ XF86AudioRaiseVolume
 	pamixer --allow-boost -i 5
 XF86AudioMute
 	pamixer --toggle-mute
+
 # brightness control
 XF86MonBrightnessDown
 	xbacklight -time 0 -dec 5
 XF86MonBrightnessUp
 	xbacklight -time 0 -inc 5
 
-#restart system
+# Restart system
 XF86Launch1
 	reboot
 
-#power menu
-alt + F4
+# Power menu
+XF86PowerOff
 	$HOME/.config/bspwm/power
 
-XF86PowerOff
+# Power menu
+alt + F4
 	$HOME/.config/bspwm/power

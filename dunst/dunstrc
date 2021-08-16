@@ -189,7 +189,7 @@
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
     # max_icon_size takes precedence over this.
-    min_icon_size = 0
+    min_icon_size = 10 
 
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 32
@@ -331,14 +331,14 @@
     foreground = "#ffffff"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
-    #icon = ~/.config/dunst/normal.ico
+    #icon = 
 
 [urgency_normal]
     background = "#r85577"
     foreground = "#ffffff"
     timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
-    #icon = ~/.config/dunst/normal.ico
+    #icon = 
 
 [urgency_critical]
     background = "#900000"
@@ -346,8 +346,7 @@
     frame_color = "#ff0000"
     timeout = 5
     # Icon for notifications with critical urgency, uncomment to enable
-
-    #icon = ~/.config/dunst/critical.ico
+    #icon = 
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

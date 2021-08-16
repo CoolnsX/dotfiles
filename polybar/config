@@ -19,11 +19,12 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #00
-x1 = #ff1a1a
+;x1 = #32343d
+x1 = #88
 x2 = #0099ff
-background-alt = #00
+background-alt = ${colors.background}
 ;foreground = ${xrdb:color7:#222}
-foreground = #ff
+foreground = #fff
 foreground-alt = #000
 primary = #ffb52a
 secondary = #00ff00
@@ -32,37 +33,38 @@ alert = #bd2c40
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 24
+height = 26
 ;offset-x = 0%
 ;offset-y = 0%
 radius = 0
-fixed-center = false
+fixed-center = true
 enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 2
 line-color = #f00
 
-border-size = 3
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
-padding-right = 1
+padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 2
+module-margin-left = 0
+module-margin-right = 0
 
 font-0 = Symbols Nerd Font:pixelsize=13;3
 font-1 = Roboto:style=Medium:pixelsize=11;2
 
-modules-left = bspwm music
+modules-left = arch bspwm music
+;modules-center = xwindow
 modules-right = xbacklight pulseaudio memory cpu wlan battery temperature date
 
-tray-position = right
-tray-padding = 0
-;tray-background = #0063ff
+tray-position = center
+tray-padding = 2
+tray-background = ${colors.x1}
 
 wm-restack = bspwm
 
@@ -74,19 +76,24 @@ override-redirect = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+;format-padding = 2
+
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:65:...%
+format-background = ${colors.x1} 
+format-padding = 2
+label = %title:0:30:...%
 
 [module/bspwm]
 type = internal/bspwm
 
 label-focused = %icon%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.x1}  
 label-focused-underline= ${colors.primary}
 label-focused-padding = 3
 
 label-occupied = %icon%
+label-occupied-background = ${colors.x1} 
 label-occupied-padding = 3
 
 label-urgent = %icon%!
@@ -95,6 +102,7 @@ label-urgent-padding = 3
 
 label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
+label-empty-background = ${colors.x1} 
 label-empty-padding = 3
 
 ; Separator in between workspaces
@@ -109,29 +117,35 @@ ws-icon-4 = V;ﱘ
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <ramp> <label>
-format-underline = #00cf00
+format =  <ramp> <label>
+format-background = ${colors.x1}
+format-underline = #00ef00
 label = %percentage%
+format-padding = 2
 
-ramp-0 = 
+ramp-0 =  
 ramp-0-foreground = #00ddff
-ramp-1 = 
+ramp-1 =  
 ramp-1-foreground = #00ff00
-ramp-2 = 
+ramp-2 =  
 ramp-2-foreground = #ffb52a
 
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = ""
+format-prefix = " "
+format-padding = 2
 format-prefix-foreground = ${colors.foreground}
+format-background = ${colors.x1}
 format-underline = #f90000
 label = %{A1:st -e htop:}%percentage:2%%%{A}
 
 [module/memory]
 type = internal/memory
 interval = 2
+format-padding = 2
 format-underline = #4bffdc
+format-background = ${colors.x1}
 label = %{A1:xfce4-taskmanager:}%mb_used%%{A}
 
 [module/wlan]
@@ -139,14 +153,18 @@ type = internal/network
 interface = wlp6s0
 interval = 3.0
 
-format-connected = 直<label-connected>
+format-connected-padding = 2
+format-connected = <label-connected>
 format-connected-underline = #ff00ff
-label-connected = %{A1:st -e nmtui:}%essid%%{A}
+format-connected-background = ${colors.x1}
+label-connected = %{A1:st -e nmtui:}直%essid%%{A}
 
 format-disconnected = <label-disconnected>
+format-disconnected-padding = 2
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %{A1:st -e nmtui:}睊No wifi%{A}
 label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected-background = ${colors.x1}
 
 [module/eth]
 type = internal/network
@@ -170,7 +188,9 @@ interval = 5
 
 date=%a, %d %b,
 time =%I:%M %p
-format-underline = #0000ff
+format-padding = 2
+format-underline = #00ddff
+format-background = ${colors.x1}
 
 label =%date% %time%
 
@@ -178,12 +198,16 @@ label =%date% %time%
 type = internal/pulseaudio
 
 format-volume = <ramp-volume> <label-volume>
+format-volume-background = ${colors.x1}
 format-volume-underline = #ffff00
 label-volume=%percentage%
 label-volume-foreground = ${root.foreground}
+format-volume-padding = 2
 
 label-muted = 
 label-muted-foreground = #ff
+format-muted-padding = 2
+format-muted-background = ${colors.x1}
 format-muted-underline = #ffff00
 ramp-volume-0 = 
 ramp-volume-0-foreground = #00ddff
@@ -198,22 +222,29 @@ click-right = pavucontrol
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-full-at = 100
+full-at = 99
 
+format-charging-background = ${colors.x1}
 format-charging = <animation-charging> <label-charging>
+format-charging-padding = 2
 format-charging-underline = #ffb52a
 
+format-discharging-background = ${colors.x1}
+format-discharging-padding = 2
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = ""
+format-full-padding = 2
 format-full-prefix-foreground = ${colors.foreground}
+format-full-background = ${colors.x1}
+format-full-prefix-background = ${colors.x1}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = ${colors.x1}
+ramp-capacity-0-foreground = #ff0000
 ramp-capacity-1 = 
-ramp-capacity-1-foreground = ${colors.x1}
+ramp-capacity-1-foreground = #ff0000
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
@@ -238,53 +269,17 @@ animation-charging-framerate = 2000
 type = internal/temperature
 ;thermal-zone = 0
 hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input
-warn-temperature = 60
-interval = 0.5
+interval = 2
 
 format = <ramp> <label>
+format-padding = 2
+format-background = ${colors.x1}
 format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label = %temperature-c%   
 
 ramp-0 =  
-ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground}
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close = 
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground}
-
-menu-0-0 = 
-menu-0-0-exec = menu-open-1
-menu-0-1 = ⏼
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = NO!
-menu-1-0-exec = menu-open-0
-menu-1-1 = 
-menu-1-1-exec = reboot
-menu-1-1-foreground = ${colors.x2}
-
-menu-2-0 = ⏼
-menu-2-0-exec =poweroff
-menu-2-0-foreground = ${colors.x1}
-menu-2-1 = NO!
-menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true
@@ -297,14 +292,34 @@ screenchange-reload = true
 [module/music]
 type = custom/script
 exec = audtool current-song
-interval = 2
+interval = 3
 format = <label> 
-label = %output:0:70:...%
+format-background = ${colors.x1}
+label =  %output:0:52:...%
+label-margin-right = 2
+label-foreground = #ffffff
 click-left = audacious -t
 click-middle = audacious -f
 click-right = audtool shutdown
 scroll-up = audtool set-volume +5
 scroll-down = audtool set-volume -5
+
+[module/arch]
+type = custom/text
+content = 
+content-padding = 2
+content-foreground = #00bbff
+content-background = ${colors.x1} 
+click-left = dmenu_run_history -p RUN:
+
+[module/power]
+type = custom/text
+content = 
+content-padding = 2
+content-margin-left= 2
+content-foreground = #fff
+content-background = #0088aa
+click-left = $HOME/.config/bspwm/power
 
 [global/wm]
 margin-top = 5

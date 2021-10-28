@@ -6,6 +6,7 @@ mixer-element=Master
 advance_on_delete=TRUE
 always_resume_paused=FALSE
 generic_title_format=${title}
+record_stream=0
 shuffle=TRUE
 
 [audgui]
@@ -44,8 +45,8 @@ actions=FALSE
 column_widths=25,25,570,175,50,234,175,25,100,25,71,275,275,275,75
 infoarea_visible=FALSE
 menu_visible=FALSE
-player_height=758
-player_width=1266
+player_height=1032
+player_width=1906
 playlist_columns=playing length title
 playlist_headers_bold=TRUE
 
@@ -68,5 +69,5 @@ qt-spectrum=462,299,288,192
 vumeter-qt=187,315,288,192
 
 [vumeter]
-falloff=50
-peak_hold_time=1
+falloff=30
+peak_hold_time=0.5

@@ -4,9 +4,11 @@ set shiftwidth=4
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'itchyny/lightline.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'patstockwell/vim-monokai-tasty'
+Plug 'preservim/nerdtree'
 
 call plug#end()
 

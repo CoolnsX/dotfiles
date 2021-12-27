@@ -12,15 +12,15 @@ super + y
 	
 # Show Pulseaudio manager
 super + p
-	pavucontrol
+	pavucontrol -t 4
 
 # Terminal emulator
 super + Return
-	st
+	lxterminal
 
 # Program launcher
 super + q
-	dmenu_run_history -p RUN:
+	dmenu_run_history -sb "#4b00aa" -p RUN:
 
 # Task manager
 ctrl  + shift + Escape
@@ -42,9 +42,9 @@ super + F6
 super + F5
 	$HOME/.config/bspwm/wifi
 
-# Toggle picom vsync
+# Anime torrent Script
 super + F7
-	$HOME/.config/bspwm/pi.sh
+	$HOME/repos_scripts/rss
 
 # Web Browser
 super + a
@@ -52,11 +52,23 @@ super + a
 
 # Screenshot selected window
 super + Print
-	maim -sB -d 1 ~/Pictures/$(date +%T_%F).png && notify-send "Selected window's screenshot taken"
+	maim -sB -d 1 ~/Pictures/$(date +%F-%H%M).png && notify-send "Selected window's screenshot taken"
 
 # Screenshot full screen
 Print
-	maim ~/Pictures/$(date +%T_%F).png && notify-send "screenshot taken"
+	maim ~/Pictures/$(date +%F-%H%M).png && notify-send "screenshot taken"
+
+#copy git token key
+super + F2
+	xclip -sel clipboard ~/token && notify-send "key copied to clipboard"
+
+#torrent downloading
+super + F3
+	st -e $HOME/repos_scripts/torrent
+
+#torrent searching and downloading
+super + F8
+	$HOME/repos_scripts/tor-cli
 
 #
 # bspwm hotkeys
@@ -173,37 +185,20 @@ XF86AudioPrev
     audacious -r
 
 # stop
-XF86AudioStop
-    audtool shutdown
-
-# Alternate media controls
-# play/pause
-super + F9
-    audacious -t
-
-# next
-super + F12
-    audacious -f
-
-# previous
-super + F11
-    audacious -r
-
-# stop
-super + F10
-    audtool shutdown
+#XF86AudioStop
+#    audtool shutdown
 
 # Interactive Screenshot and copy to clipboard
 super + F1
-    maim -s -d 1 | xclip -selection clipboard -t image/png && notify-send "screenshot copied to clipboard"
+    maim -sB -d 1 | xclip -selection clipboard -t image/png && notify-send "screenshot copied to clipboard"
 
 # volume control
 XF86AudioLowerVolume
-	pamixer --allow-boost -d 5
+	pulseaudio-control --volume-max 150 down
 XF86AudioRaiseVolume
-	pamixer --allow-boost -i 5
+	pulseaudio-control --volume-max 150 up
 XF86AudioMute
-	pamixer --toggle-mute
+	pulseaudio-control togmute
 
 # brightness control
 XF86MonBrightnessDown

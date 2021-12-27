@@ -5,6 +5,8 @@ mixer-element=Master
 [audacious]
 advance_on_delete=TRUE
 always_resume_paused=FALSE
+equalizer_bands=2,6,3,2,1,1,2,2,3,5
+equalizer_preamp=-4
 generic_title_format=${title}
 record_stream=0
 shuffle=TRUE
@@ -45,8 +47,8 @@ actions=FALSE
 column_widths=25,25,570,175,50,234,175,25,100,25,71,275,275,275,75
 infoarea_visible=FALSE
 menu_visible=FALSE
-player_height=1032
-player_width=1906
+player_height=806
+player_width=950
 playlist_columns=playing length title
 playlist_headers_bold=TRUE
 

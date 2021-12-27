@@ -57,6 +57,10 @@ style = "bold green"
 format = " [$symbol$version]($style) "
 style = "bold green"
 
+[golang]
+format = " [$symbol$version]($style) "
+style = "bold green"
+
 [username]
 style_user = "bold fg:#ffa500"
 show_always = true

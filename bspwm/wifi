@@ -1,9 +1,9 @@
 #!/bin/bash
 if rfkill list wifi | grep -q 'yes$' ; then
-   doas rfkill unblock 0
+   doas rfkill unblock wifi
    notify-send "wifi on"
 else
-   doas rfkill block 0
+   doas rfkill block wifi 
    notify-send "wifi off"
 fi
 

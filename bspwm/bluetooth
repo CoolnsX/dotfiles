@@ -33,7 +33,6 @@ toggle_power() {
 	doas rfkill block bluetooth
     else
 	doas rfkill unblock bluetooth
-	doas rfkill unblock all
 	sleep 2
         bluetoothctl power on
     fi
@@ -282,7 +281,7 @@ show_menu() {
 }
 
 # dmenu command to pipe into, can add any options here
-dmenu_command="dmenu -i -p"
+dmenu_command="dmenu -p"
 
 case "$1" in
     --status)

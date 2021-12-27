@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
 sleep 5
-synclient TapButton1=1
-synclient HorizEdgeScroll=1
-synclient RBCornerButton=3
-
+hda-verb /dev/snd/hwC0D0 0x20 SET_COEF_INDEX 0x67
+hda-verb /dev/snd/hwC0D0 0x20 SET_PROC_COEF 0x3000

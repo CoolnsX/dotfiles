@@ -58,6 +58,10 @@ super + Print
 Print
 	maim ~/Pictures/$(date +%F-%H%M).png && notify-send "screenshot taken"
 
+# Interactive Screenshot and copy to clipboard
+super + F1
+    maim -sB -d 1 | xclip -selection clipboard -t image/png && notify-send "screenshot copied to clipboard"
+
 #copy git token key
 super + F2
 	xclip -sel clipboard ~/token && notify-send "key copied to clipboard"
@@ -187,10 +191,6 @@ XF86AudioPrev
 # stop
 #XF86AudioStop
 #    audtool shutdown
-
-# Interactive Screenshot and copy to clipboard
-super + F1
-    maim -sB -d 1 | xclip -selection clipboard -t image/png && notify-send "screenshot copied to clipboard"
 
 # volume control
 XF86AudioLowerVolume

@@ -5,12 +5,12 @@ xsetroot -cursor_name left_ptr &
 
 #Startup applications
 picom --vsync &
-xwallpaper --stretch $HOME/wallpapers/3.jpg &
+xwallpaper --stretch $HOME/wallpapers/5.jpg &
 $HOME/.config/bspwm/launch.sh &
 /usr/bin/dunst &
-xset s 300 &
+#xset s 300 &
 syndaemon -i 0.3 -dKR
-xss-lock $HOME/.config/bspwm/screenlock.sh &
+#xss-lock $HOME/.config/bspwm/screenlock.sh &
 ln -sf /mnt/BE0298E20298A0C7/ansar/Videos $HOME/ &
 ln -sf /mnt/BE0298E20298A0C7/ansar/Pictures $HOME/ &
 ln -sf /mnt/BE0298E20298A0C7/Downloads $HOME/ &
@@ -29,7 +29,6 @@ bspc config top_padding		 34
 bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-
 
 bspc rule -a Lxterminal desktop='^2' follow=on
 bspc rule -a st-256color desktop='^5' follow=on

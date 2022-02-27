@@ -18,9 +18,9 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #bb
+background = #00
 ;x1 = #32343d
-x1 = #bb
+x1 = #00
 x2 = #0099ff
 background-alt = ${colors.background}
 ;foreground = ${xrdb:color7:#222}
@@ -59,7 +59,7 @@ module-margin-right = 1
 font-0 = Roboto:style=Medium:pixelsize=12;2
 font-1 = Symbols Nerd Font:pixelsize=16;3
 
-modules-left = arch bspwm music
+modules-left = arch bspwm music-status music mpd
 ;modules-center = xwindow
 modules-right = xbacklight pulseaudio-control cpu memory wlan battery temperature date power
 
@@ -286,7 +286,7 @@ format-padding = 0
 format-background = ${colors.x1}
 format-underline = #f50a6d
 label-foreground = #f50a6d
-label-warn-foreground = #f50a6d
+label-warn-foreground = #ff0000
 format-warn-underline = #f50a6d
 label = %temperature-c%   
 label-warn = %temperature-c%
@@ -304,7 +304,21 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-;pseudo-transparency = false
+;pseudo-transparency = true
+
+[module/music-status]
+type = custom/script
+exec = audtool playback-status
+interval = 1
+format = <label> 
+format-background = ${colors.x1}
+label =  %output%
+label-margin-right = 0
+label-foreground = #ffffff
+click-left = audacious -t
+click-right = audtool shutdown
+scroll-up = audtool set-volume +5
+scroll-down = audtool set-volume -5
 
 [module/music]
 type = custom/script
@@ -312,31 +326,31 @@ exec = audtool current-song
 interval = 2
 format = <label> 
 format-background = ${colors.x1}
-label =  %output:00:70:...%
-label-margin-right = 2
+label =%output:00:60:...%
+label-margin-right = 0
 label-foreground = #ffffff
-click-left = audacious -t
-click-middle = audacious -f
+click-left = audacious -f
 click-right = audtool shutdown
 scroll-up = audtool set-volume +5
 scroll-down = audtool set-volume -5
 
 [module/arch]
 type = custom/text
-content = 
+content =  MENU
 content-padding = 2
 content-foreground = #fff
 content-background = #4b00aa
-click-left = dmenu_run_history -sb "#4b00aa" -p RUN:
+click-left = $HOME/.config/rofi/launchers/misc/launcher.sh
+;click-left = dmenu_run_history -sb "#4b00aa" -p RUN:
 
 [module/power]
 type = custom/text
-content = 
+content =POWER  
 content-padding = 2
 content-margin-left= 2
 content-foreground = #fff
 content-background = #ee0044
-click-left = $HOME/.config/bspwm/power
+click-left = $HOME/.config/rofi/powermenu/powermenu.sh
 
 [module/pulseaudio-control]
 type = custom/script

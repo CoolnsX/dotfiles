@@ -809,7 +809,7 @@ domain audacious-plugins
 priority 0
 about 0
 config 1
-enabled 0
+enabled 1
 general /usr/lib/audacious/General/song_change.so
 stamp 1642955037
 version 48

@@ -31,9 +31,8 @@ secondary = #00ff00
 alert = #bd2c40
 
 [bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 28
+height = 24
 ;offset-x = 0%
 ;offset-y = 0%
 radius = 5
@@ -46,7 +45,7 @@ foreground = ${colors.foreground}
 line-size = 2
 line-color = #f00
 
-border-size = 4
+border-size = 3
 border-color = #00000000
 
 padding-left = 0
@@ -56,10 +55,10 @@ module-margin-left = 2
 module-margin-right = 1
 
 
-font-0 = Roboto:style=Medium:pixelsize=12;2
-font-1 = Symbols Nerd Font:pixelsize=16;3
+font-0 = Roboto:style=Bold:pixelsize=10;2
+font-1 = Symbols Nerd Font:pixelsize=12;3
 
-modules-left = arch bspwm music-status music mpd
+modules-left = arch bspwm music-status music
 ;modules-center = xwindow
 modules-right = xbacklight pulseaudio-control cpu memory wlan battery temperature date power
 
@@ -153,7 +152,7 @@ label = %{A1:xfce4-taskmanager:}%mb_used%%{A}
 
 [module/wlan]
 type = internal/network
-interface = wlo1
+interface = wlp6s0 
 interval = 3.0
 
 format-connected-padding = 0
@@ -225,8 +224,8 @@ click-right = pavucontrol
 
 [module/battery]
 type = internal/battery
-battery = BAT0
-adapter = ADP1
+battery = BAT1
+adapter = ACAD
 time-format = %H:%M
 full-at = 100
 
@@ -336,21 +335,20 @@ scroll-down = audtool set-volume -5
 
 [module/arch]
 type = custom/text
-content =  MENU
+content =  
 content-padding = 2
 content-foreground = #fff
 content-background = #4b00aa
-click-left = $HOME/.config/rofi/launchers/misc/launcher.sh
-;click-left = dmenu_run_history -sb "#4b00aa" -p RUN:
+click-left = dmenu_run_history -sb "#4b00aa" -p RUN:
 
 [module/power]
 type = custom/text
-content =POWER  
+content =
 content-padding = 2
 content-margin-left= 2
 content-foreground = #fff
 content-background = #ee0044
-click-left = $HOME/.config/rofi/powermenu/powermenu.sh
+click-left = $HOME/.config/bspwm/power 
 
 [module/pulseaudio-control]
 type = custom/script
@@ -358,7 +356,7 @@ tail = true
 format-underline = #ffff00
 format-background = ${colors.x1}
 label-foreground = #ffff00
-exec = pulseaudio-control --icons-volume " , , " --icon-muted " " --sink-nickname "alsa_output.pci-0000_00_1f.3.analog-stereo: Internal" --sink-nicknames-from "device.description" listen
+exec = pulseaudio-control --icons-volume " , , " --icon-muted " " --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo: Internal" --sink-nicknames-from "device.description" listen
 click-right = exec pavucontrol &
 click-left = pulseaudio-control togmute
 click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink

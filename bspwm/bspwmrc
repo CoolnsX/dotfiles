@@ -5,18 +5,12 @@ xsetroot -cursor_name left_ptr &
 
 #Startup applications
 picom --vsync &
-xwallpaper --stretch $HOME/wallpapers/5.jpg &
+xwallpaper --stretch $HOME/wall/1.jpg &
 $HOME/.config/bspwm/launch.sh &
 /usr/bin/dunst &
 #xset s 300 &
 syndaemon -i 0.3 -dKR
 #xss-lock $HOME/.config/bspwm/screenlock.sh &
-ln -sf /mnt/BE0298E20298A0C7/ansar/Videos $HOME/ &
-ln -sf /mnt/BE0298E20298A0C7/ansar/Pictures $HOME/ &
-ln -sf /mnt/BE0298E20298A0C7/Downloads $HOME/ &
-ln -sf /mnt/BE0298E20298A0C7/Softwares $HOME/ &
-ln -sf /mnt/BE0298E20298A0C7/coding $HOME/ &
-ln -sf /mnt/3C84B21084B1CCA0/MOVIES $HOME/ &
 #$HOME/scripts/startup.sh
 
 #BSPWM configurations and rules
@@ -36,5 +30,4 @@ bspc rule -a Google-chrome desktop='^1' follow=on
 bspc rule -a Audacious desktop='^6' state=pseudo_tiled 
 bspc rule -a Pavucontrol desktop='^6' follow=on
 bspc rule -a Pcmanfm desktop='^3' follow=on 
-bspc rule -a Transmission-gtk desktop='^5' follow=on
 bspc rule -a Code desktop='^4' follow=on

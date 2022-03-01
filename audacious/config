@@ -72,8 +72,8 @@ actions=FALSE
 column_widths=25,25,570,175,50,234,175,25,100,25,63,275,275,275,75
 infoarea_visible=FALSE
 menu_visible=FALSE
-player_height=893
-player_width=1810
+player_height=754
+player_width=630
 playlist_columns=playing length title
 playlist_headers_bold=TRUE
 

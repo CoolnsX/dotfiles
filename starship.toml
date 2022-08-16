@@ -14,7 +14,7 @@ format = " took [$duration]($style)"
 format = "[$path]($style)[$lock_symbol]($lock_style)"
 
 [git_branch]
-format = " on [$symbol$branch]($style) "
+format = " on [$symbol$branch]($style)"
 symbol = "🍣 "
 style = "bold yellow"
 

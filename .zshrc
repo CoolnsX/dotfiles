@@ -1,29 +1,50 @@
+#user-defined functions
+gtp(){
+    git add .
+    git commit -m "$*"
+    git push
+}
+
+gtb () {
+    [ -z "$*" ] && br=$(git branch -a | fzf --border=rounded --layout=reverse --height=10 | tr -d ' ') || br=$*
+    [ -z "$br" ] || git checkout $br
+    unset br
+}
+
+url() {
+    curl -s https://0x0.st -F "file=@$*" | xclip -sel clip && notify-send "Link copied to clipboard"
+}
+
+gtd () {
+    [ -z "$*" ] && file=$(git diff --name-only | fzf --border=rounded --height=10 --layout=reverse | tr -d ' ') || file=$*
+    [ -z "$file" ] || git diff $file
+    unset file
+}
+
 # Lines configured by zsh-newuser-install
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="st"
+export TERMINAL="lxterminal"
 export OPENER="xdg-open"
-export VIDEO="vlc"
+export VIDEO="mpv"
 export WM="bspwm"
-export PAGER="less"
 export IMAGE="sxiv"
-alias neofetch="neofetch --ascii_distro Arch_small"
-alias v="nvim"
-alias neofetch="fm6000 -c random -r --de=bspwm"
+alias v="nvim -O"
+alias anime="$HOME/lol/ani-cli"
 alias cp="cp -v"
-alias refresh="doas reflector --verbose --latest 10 --sort rate --age 12 --protocol http,https --save /etc/pacman.d/mirrorlist"
+alias rm="rm -v"
 alias grep="grep --color=auto"
+alias ncdu="ncdu --color dark"
 alias ll="ls --color=auto -alh"
-alias ls="ls --color=auto -hl"
+alias ls="ls --color=auto"
 alias ncbb="nvim ~/.config/bspwm/bspwmrc"
 alias ncpc="nvim ~/.config/polybar/config"
 alias ncss="nvim ~/.config/sxhkd/sxhkdrc"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#00F5FF,underline
-ZSH_HIGHLIGHT_STYLES[precommand]=fg=#00F5FF,underline
-ZSH_HIGHLIGHT_STYLES[arg0]=fg=#00F5FF
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg="#D5C4B8",underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg="#D5C4B8",underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg="#D5C4B8"
 
 HISTFILE=~/.histfile
 HISTSIZE=200

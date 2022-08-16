@@ -12,4 +12,6 @@ pulse/
 user-dirs.dirs
 user-dirs.locale
 xfce4/
-
+nvim/plugin
+http*
+ookla

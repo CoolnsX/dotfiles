@@ -1,8 +1,13 @@
 #!/bin/sh
 
-charge=$(cat /sys/class/power_supply/BAT0/capacity)
-stats=$(cat /sys/class/power_supply/BAT0/status)
-
-if [[ $charge -le 20 && $stats == "Discharging" ]]; then
-    notify-send -u critical "${charge}% Battery low!!..Give me some juice!!"
-fi
+while :;do
+    charge=$(cat /sys/class/power_supply/BAT*/capacity)
+    stats=$(cat /sys/class/power_supply/BAT*/status)
+    if [ $charge -le 20 ] && [ $stats = "Discharging" ]; then
+	notify-send -u critical "🔌 ${charge}% Battery low!!..Give me some juice!!" -r 2
+	sleep 30
+    elif [ "$stats" = "Discharging" ] && [ "$charge" -gt 20 ] && [ "$charge" -le 99 ];then
+	notify-send "🔋 ${charge}% Remaining" -r 2
+	sleep 600
+    fi
+done

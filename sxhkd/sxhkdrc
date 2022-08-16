@@ -4,12 +4,8 @@
 
 # File manager
 super + e
-	pcmanfm	
+	pcmanfm
 
-# Visual Studio code
-super + y
-	code
-	
 # Show Pulseaudio manager
 super + p
 	pavucontrol -t 4
@@ -20,7 +16,7 @@ super + Return
 
 # Program launcher
 super + q
-	dmenu_run_history -sb "#4b00aa" -p RUN:
+	dmenu_run_history -sb "#D5C4B89BBF12FFFF" -p "RUN:"
 
 # Task manager
 ctrl  + shift + Escape
@@ -62,6 +58,14 @@ super + Print
 Print
 	maim ~/Pictures/$(date +%F-%H%M).png && notify-send "screenshot taken"
 
+#network info
+super + Insert
+	notify-send "<--------(Internet Status)-------->" "$(nmcli device status | sed -nE 's_(.*connected.*)_\1_p' | tr -s ' ' | cut -d' ' -f2-4)" -r 3
+
+#Workspace info
+{_,super + }Pause
+	$HOME/.config/bspwm/workspace
+
 #copy git token key
 super + F2
 	xclip -sel clipboard ~/token && notify-send "key copied to clipboard"
@@ -72,10 +76,19 @@ super + F3
 
 #torrent searching and downloading
 super + F8
-	$HOME/repos_scripts/tor-cli
+	$HOME/repos_scripts/tor-bay
 
-super + F10
+super + F9
 	playerctl play-pause
+
+super + {_,shift + }F10
+	notify-send "Opening link in mpv" && {mpv --input-ipc-server=/tmp/mpvsocket "$(xclip -out -sel clipboard)" --referrer="$(xclip -out -sel clipboard)",st -e mpv --input-ipc-server=/tmp/mpvsocket "$(xclip -out -sel clipboard)" --ytdl-format=bestaudio --referrer="$(xclip -out -sel clipboard)"}
+
+super + F11
+	$HOME/.config/bspwm/info
+
+super + F12
+	for i in $(seq 5);do notify-send "$(date)" -r 3 -t 1200 &;sleep 1;done
 
 #
 # bspwm hotkeys
@@ -181,19 +194,19 @@ super + {Left,Down,Up,Right}
 
 # play/pause
 XF86AudioPlay
-    audacious -t
+    echo cycle pause | socat - "/tmp/mpvsocket"
 
 # next
 XF86AudioNext
-    audacious -f
+    echo playlist-next | socat - "/tmp/mpvsocket"
 
 # previous
 XF86AudioPrev
-    audacious -r
+    echo playlist-prev | socat - "/tmp/mpvsocket"
 
-# stop
-#XF86AudioStop
-#    audtool shutdown
+# kill mpv
+XF86AudioStop
+    killall mpv
 
 # Interactive Screenshot and copy to clipboard
 super + F1
@@ -201,21 +214,17 @@ super + F1
 
 # volume control
 XF86AudioLowerVolume
-	pulseaudio-control --volume-max 150 down
+	pamixer -d 2 && $HOME/.config/bspwm/volume
 XF86AudioRaiseVolume
-	pulseaudio-control --volume-max 150 up
+	pamixer -i 2 && $HOME/.config/bspwm/volume
 XF86AudioMute
-	pulseaudio-control togmute
+	pamixer -t  && $HOME/.config/bspwm/volume
 
 # brightness control
 XF86MonBrightnessDown
-	xbacklight -time 0 -dec 5
+	xbacklight -time 0 -dec 5 && notify-send -h int:value:$(xbacklight -g | cut -d'.' -f1) "☀️  $(xbacklight -g | cut -d'.' -f1)" -t 1000 -r 1
 XF86MonBrightnessUp
-	xbacklight -time 0 -inc 5
-
-# Restart system
-XF86Launch1
-	reboot
+	xbacklight -time 0 -inc 5 && notify-send -h int:value:$(xbacklight -g | cut -d'.' -f1) "☀️  $(xbacklight -g | cut -d'.' -f1)" -t 1000 -r 1
 
 # Power menu
 XF86PowerOff

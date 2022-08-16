@@ -1,5 +1,6 @@
 #!/bin/sh
 
+$HOME/.config/bspwm/workspace &
 case "$(printf "lock\\nsuspend\\nhibernate\\nlogout\\nreboot\\npoweroff" | dmenu -sb "#ee0044" -l 10 -p "⏻ ")" in
 	lock) $HOME/.config/bspwm/screenlock.sh ;;
 	suspend) systemctl suspend ;;

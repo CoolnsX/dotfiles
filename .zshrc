@@ -1,8 +1,11 @@
 #user-defined functions
 gtp(){
+    [ -z "$*" ] && commit=$(curl -s "https://raw.githubusercontent.com/ngerakines/commitment/master/commit_messages.txt" | shuf -n1) || commit=$*
     git add .
-    git commit -m "$*"
+    git commit -m "$commit"
+    xclip -sel clip $HOME/token
     git push
+    unset commit
 }
 
 gtb () {
@@ -11,9 +14,7 @@ gtb () {
     unset br
 }
 
-url() {
-    curl -s https://0x0.st -F "file=@$*" | xclip -sel clip && notify-send "Link copied to clipboard"
-}
+url() { curl -s https://0x0.st -F "file=@$*" | xclip -sel clip && notify-send "Link copied to clipboard"; }
 
 gtd () {
     [ -z "$*" ] && file=$(git diff --name-only | fzf --border=rounded --height=10 --layout=reverse | tr -d ' ') || file=$*
@@ -21,43 +22,51 @@ gtd () {
     unset file
 }
 
+gtc () { [ -z "$*" ] && [ -p "/dev/stdin" ] && read -r query </dev/stdin || query=$*; git clone "$query"; }
+
+gtr () { [ -z "$*" ] && [ -p "/dev/stdin" ] && read -r query </dev/stdin || query=$*; curl -s "https://api.github.com/users/$query/repos" | sed -nE 's|.*svn_url": "([^"]*)".*|\1|p' | fzf --border --height=10 --layout=reverse; }
+
+gtu () { [ -z "$*" ] || curl -s "https://api.github.com/search/users?q=$*" | sed -nE 's_.*login": "([^"]*)".*_\1_p' | fzf --layout=reverse --border --height=10; }
+
+clshist() {
+    a=$(cat ~/.histfile | wc -l)
+    [ "$a" -gt 201 ] && sed -i "1,$((a - 200))d" .histfile
+}
+
 # Lines configured by zsh-newuser-install
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="lxterminal"
+export TERMINAL="st"
 export OPENER="xdg-open"
 export VIDEO="mpv"
 export WM="bspwm"
-export IMAGE="sxiv"
+export IMAGE="nsxiv"
 alias v="nvim -O"
 alias anime="$HOME/lol/ani-cli"
 alias cp="cp -v"
 alias rm="rm -v"
+alias mv="mv -v"
 alias grep="grep --color=auto"
 alias ncdu="ncdu --color dark"
 alias ll="ls --color=auto -alh"
 alias ls="ls --color=auto"
+alias fetch='/bin/*fetch'
 alias ncbb="nvim ~/.config/bspwm/bspwmrc"
-alias ncpc="nvim ~/.config/polybar/config"
 alias ncss="nvim ~/.config/sxhkd/sxhkdrc"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg="#D5C4B8",underline
-ZSH_HIGHLIGHT_STYLES[precommand]=fg="#D5C4B8",underline
-ZSH_HIGHLIGHT_STYLES[arg0]=fg="#D5C4B8"
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=white,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
 
+clshist
 HISTFILE=~/.histfile
 HISTSIZE=200
 SAVEHIST=200
 setopt autocd
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
 zstyle :compinstall filename '/home/tanveer/.zshrc'
-
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' menu select
-# End of lines added by compinstall
-
 eval "$(starship init zsh)"

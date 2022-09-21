@@ -1,0 +1,6 @@
+#!/bin/sh
+
+x="Workspace $1"
+[ -z "$3" ] || x="Moved to $x"
+notify-send "$x" -r 1 -t 700
+[ -z "$3" ] && riverctl set-focused-tags $2 || riverctl set-view-tags $2

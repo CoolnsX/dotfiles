@@ -1,11 +1,10 @@
 #!/bin/sh
 
-$HOME/.config/bspwm/workspace &
-case "$(printf "lock\\nsuspend\\nhibernate\\nlogout\\nreboot\\npoweroff" | dmenu -sb "#ee0044" -l 5 -p "⏻ " -h 40)" in
+case "$(printf "lock\\nsuspend\\nhibernate\\nlogout\\nreboot\\npoweroff" | wofi -bd -p "⏻ ")" in
 	lock) $HOME/.config/bspwm/screenlock.sh ;;
 	suspend) systemctl suspend ;;
 	hibernate) systemctl hibernate ;;
-	logout) bspc quit ;;
+	logout) riverctl exit ;;
 	reboot) systemctl reboot ;;
 	poweroff) systemctl poweroff ;;
 esac

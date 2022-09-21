@@ -4,7 +4,8 @@
 local set = vim.opt
 set.number=true
 set.relativenumber=true
-set.shiftwidth=4
+set.shiftwidth=8
+set.termguicolors = true
 
 --plugin setup
 local fn = vim.fn
@@ -17,14 +18,13 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
     use 'https://gitlab.com/__tpb/monokai-pro.nvim'
-    use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig", }
+    use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig", }
+    --use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
+    use 'norcalli/nvim-colorizer.lua'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
@@ -113,10 +113,39 @@ cmp.setup {
 }
 
 --theme setup
+require'colorizer'.setup{
+    '*';
+    css = { rgb_fn = true;RRGGBBAA = true; };
+}
+
 vim.g.monokaipro_transparent=true
 vim.cmd[[colorscheme monokaipro]]
+--require('pywal').setup()
 require('lualine').setup {
   options = {
     theme = 'monokaipro',
+    --theme = 'pywal',
   }
 }
+--vim.cmd[[hi Normal ctermbg=none guibg=none]]
+--vim.cmd[[hi NormalNC ctermbg=none guibg=none]]
+--vim.cmd[[hi Comment ctermbg=none guibg=none]]
+--vim.cmd[[hi Constant ctermbg=none guibg=none]]
+--vim.cmd[[hi Special ctermbg=none guibg=none]]
+--vim.cmd[[hi Identifier ctermbg=none guibg=none]]
+--vim.cmd[[hi Statement ctermbg=none guibg=none]]
+--vim.cmd[[hi PreProc ctermbg=none guibg=none]]
+--vim.cmd[[hi Type ctermbg=none guibg=none]]
+--vim.cmd[[hi Underlined ctermbg=none guibg=none]]
+--vim.cmd[[hi Todo ctermbg=none guibg=none]]
+--vim.cmd[[hi String ctermbg=none guibg=none]]
+--vim.cmd[[hi Function ctermbg=none guibg=none]]
+--vim.cmd[[hi Conditional ctermbg=none guibg=none]]
+--vim.cmd[[hi Repeat ctermbg=none guibg=none]]
+--vim.cmd[[hi Operator ctermbg=none guibg=none]]
+--vim.cmd[[hi Structure ctermbg=none guibg=none]]
+--vim.cmd[[hi LineNr ctermbg=none guibg=none]]
+--vim.cmd[[hi NonText ctermbg=none guibg=none]]
+--vim.cmd[[hi SignColumn ctermbg=none guibg=none]]
+--vim.cmd[[hi CursorLineNr ctermbg=none guibg=none]]
+--vim.cmd[[hi EndOfBuffer ctermbg=none guibg=none]]

@@ -79,7 +79,7 @@
     # Padding between text and separator.
     padding = 8
 
-    highlight = "#D5C4B8"
+    highlight = "#BDA3E8"
 
     # Horizontal padding.
     horizontal_padding = 8
@@ -92,7 +92,7 @@
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#D5C4B8"
+    frame_color = "#BDA3E8"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -160,7 +160,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "<b>%s</b> %n\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -309,7 +309,6 @@
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
     background = "#2b2b2b"
     foreground = "#ffffff"
     timeout = 5

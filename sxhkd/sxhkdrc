@@ -12,15 +12,15 @@ super + p
 
 # Terminal emulator
 super + Return
-	lxterminal
+	st
 
 # Program launcher
 super + q
-	dmenu_run_history -sb "#D5C4B89BBF12FFFF" -p "RUN:"
+	dmenu_run_history -sb "#BDA3E8" -p "RUN:"
 
 # Task manager
 ctrl  + shift + Escape
-	xfce4-taskmanager
+	st -e btop
 
 # make sxhkd reload its configuration files:
 super + @Escape
@@ -56,7 +56,7 @@ super + Print
 
 # Screenshot full screen
 Print
-	maim ~/Pictures/$(date +%F-%H%M).png && notify-send "screenshot taken"
+	maim -d 2 ~/Pictures/$(date +%F-%H%M).png && notify-send "screenshot taken"
 
 #network info
 super + Insert
@@ -218,13 +218,13 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
 	pamixer -i 2 && $HOME/.config/bspwm/volume
 XF86AudioMute
-	pamixer -t  && $HOME/.config/bspwm/volume
+	pamixer -t && $HOME/.config/bspwm/volume
 
 # brightness control
 XF86MonBrightnessDown
-	xbacklight -time 0 -dec 5 && notify-send -h int:value:$(xbacklight -g | cut -d'.' -f1) "☀️  $(xbacklight -g | cut -d'.' -f1)" -t 1000 -r 1
+	light -U 5 && notify-send -h int:value:$(light -G) "☀️ " -t 1000 -r 1
 XF86MonBrightnessUp
-	xbacklight -time 0 -inc 5 && notify-send -h int:value:$(xbacklight -g | cut -d'.' -f1) "☀️  $(xbacklight -g | cut -d'.' -f1)" -t 1000 -r 1
+	light -A 5 && notify-send -h int:value:$(light -G) "☀️ " -t 1000 -r 1
 
 # Power menu
 XF86PowerOff

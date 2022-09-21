@@ -1,17 +1,34 @@
 #!/bin/sh
 
-# This is the example configuration file for river.
-#
-# If you wish to edit this, you will probably want to copy it to
-# $XDG_CONFIG_HOME/river/init or $HOME/.config/river/init first.
-#
-# See the river(1), riverctl(1), and rivertile(1) man pages for complete
-# documentation.
-
 # Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
+#autostarting some applications cause why not..
+riverctl spawn "xsetroot -cursor_name left_ptr"
+riverctl spawn "dunst"
+riverctl spawn "xrdb -merge ~/.Xresources"
+riverctl spawn "swaybg -m stretch -i /home/tanveer/wall/16.png"
 
-# Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal Super Return spawn lxterminal
+# Super+Return to start a terminal
+riverctl map normal Super Return spawn "$HOME/.config/river/run 'st' '2'"
+
+# Some hotkeys to start some applications cause i definately need them
+riverctl map normal Super Print spawn "$HOME/.config/river/ss 'fullsave'"
+riverctl map normal Super F1 spawn "$HOME/.config/river/ss 'selclip'"
+riverctl map normal None Print spawn "$HOME/.config/river/ss 'fullclip'"
+riverctl map normal Super a spawn "$HOME/.config/river/run 'google-chrome-stable' '1'"
+riverctl map normal Super p spawn "$HOME/.config/river/run 'pavucontrol -t 4' '4'"
+riverctl map normal Super e spawn "$HOME/.config/river/run 'pcmanfm' '3'"
+riverctl map normal Control+Shift Escape spawn "$HOME/.config/river/run 'st -e btop'"
+riverctl map normal Super F2 spawn 'xclip -sel clipboard ~/token && notify-send "key copied to clipboard"'
+riverctl map normal Super F3 spawn "st -e $HOME/repos_scripts/torrent"
+riverctl map normal Super F4 spawn "$HOME/repos_scripts/ani-new"
+riverctl map normal Super F5 spawn "$HOME/.config/river/wifi"
+riverctl map normal Super F7 spawn "$HOME/repos_scripts/rss"
+riverctl map normal Alt F4 spawn "$HOME/.config/river/power"
+riverctl map normal Super F8 spawn "$HOME/repos_scripts/tor-bay"
+riverctl map normal Super F11 spawn "$HOME/.config/river/info"
+riverctl map normal Super F12 spawn 'for i in $(seq 5);do notify-send "$(date)" -r 3 -t 1200;sleep 1;done'
+#riverctl map normal Super q spawn 'dmenu_run_history -sb "#FEB066" -p "RUN:"'
+riverctl map normal Super Insert spawn 'notify-send "<--------(Internet Status)-------->" "$(nmcli device status | sed -nE "s_(.*connected.*)_\1_p" | tr -s " " | cut -d" " -f2-4)" -r 3'
 
 # Super+W to close the focused view
 riverctl map normal Super W close
@@ -19,14 +36,14 @@ riverctl map normal Super W close
 # Super+Shift+E to exit river
 riverctl map normal Super+Shift E exit
 
-# Super+J and Super+K to focus the next/previous view in the layout stack
-riverctl map normal Super J focus-view next
-riverctl map normal Super K focus-view previous
+# Super+Tab Super+Shift+Tab focus the next/previous view in the layout stack
+riverctl map normal Super Tab focus-view next
+riverctl map normal Super+Shift Tab focus-view previous
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
-riverctl map normal Super+Shift J swap next
-riverctl map normal Super+Shift K swap previous
+riverctl map normal Super Grave swap next
+riverctl map normal Super+Shift Grave previous
 
 # Super+Period and Super+Comma to focus the next/previous output
 riverctl map normal Super Period focus-output next
@@ -37,7 +54,7 @@ riverctl map normal Super+Shift Period send-to-output next
 riverctl map normal Super+Shift Comma send-to-output previous
 
 # Super+Return to bump the focused view to the top of the layout stack
-riverctl map normal Super Return zoom
+#riverctl map normal Super Return zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
 riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
@@ -71,15 +88,17 @@ riverctl map-pointer normal Super BTN_LEFT move-view
 # Super + Right Mouse Button to resize views
 riverctl map-pointer normal Super BTN_RIGHT resize-view
 
-for i in $(seq 1 9)
+for i in $(seq 1 4)
 do
     tags=$((1 << ($i - 1)))
 
     # Super+[1-9] to focus tag [0-8]
-    riverctl map normal Super $i set-focused-tags $tags
+    riverctl map normal Super $i spawn "$HOME/.config/river/workspace '$i' '$tags'"
+    #riverctl map normal Super $i set-focused-tags $tags
 
     # Super+Shift+[1-9] to tag focused view with tag [0-8]
-    riverctl map normal Super+Shift $i set-view-tags $tags
+    riverctl map normal Super+Shift $i spawn "$HOME/.config/river/workspace '$i' '$tags' 'e'"
+    #riverctl map normal Super+Shift $i set-view-tags $tags
 
     # Super+Ctrl+[1-9] to toggle focus of tag [0-8]
     riverctl map normal Super+Control $i toggle-focused-tags $tags
@@ -95,10 +114,10 @@ riverctl map normal Super 0 set-focused-tags $all_tags
 riverctl map normal Super+Shift 0 set-view-tags $all_tags
 
 # Super+Space to toggle float
-riverctl map normal Super Space toggle-float
+riverctl map normal Super f toggle-float
 
 # Super+F to toggle fullscreen
-riverctl map normal Super F toggle-fullscreen
+riverctl map normal Super m toggle-fullscreen
 
 # Super+{Up,Right,Down,Left} to change layout orientation
 riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
@@ -106,27 +125,14 @@ riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
 riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
 riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
 
-# Declare a passthrough mode. This mode has only a single mapping to return to
-# normal mode. This makes it useful for testing a nested wayland compositor
-riverctl declare-mode passthrough
-
-# Super+F11 to enter passthrough mode
-riverctl map normal Super F11 enter-mode passthrough
-
-# Super+F11 to return to normal mode
-riverctl map passthrough Super F11 enter-mode normal
-
 # Various media key mapping examples for both normal and locked mode which do
 # not have a modifier
 for mode in normal locked
 do
-    # Eject the optical drive (well if you still have one that is)
-    riverctl map $mode None XF86Eject spawn 'eject -T'
-
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
-    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 2 && $HOME/.config/river/volume'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 2 && $HOME/.config/river/volume'
+    riverctl map $mode None XF86AudioMute         spawn 'pamixer -t && $HOME/.config/river/volume'
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
@@ -135,13 +141,13 @@ do
     riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
 
     # Control screen backlight brighness with light (https://github.com/haikarainen/light)
-    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5 && notify-send -h int:value:$(light -G | cut -d'.' -f1) "☀️  $(light -G | cut -d'.' -f1)" -t 1000 -r 1'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5 && notify-send -h int:value:$(light -G | cut -d'.' -f1) "☀️  $(light -G | cut -d'.' -f1)" -t 1000 -r 1'
 done
 
 # Set background and border color
-riverctl background-color 0x002b36
-riverctl border-color-focused 0x93a1a1
+riverctl background-color 0xFEB066
+riverctl border-color-focused 0xFEB066
 riverctl border-color-unfocused 0x586e75
 
 # Set keyboard repeat rate
@@ -151,10 +157,7 @@ riverctl set-repeat 50 300
 riverctl float-filter-add app-id float
 riverctl float-filter-add title "popup title with spaces"
 
-# Set app-ids and titles of views which should use client side decorations
-riverctl csd-filter-add app-id "gedit"
-
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-exec rivertile -view-padding 6 -outer-padding 6
+exec rivertile -view-padding 2 -outer-padding 2 -main-ratio 0.5

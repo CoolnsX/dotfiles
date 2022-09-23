@@ -16,7 +16,7 @@ super + Return
 
 # Program launcher
 super + q
-	dmenu_run_history -sb "#BDA3E8" -p "RUN:"
+	dmenu_run_history -sb "#C01D41" -p "RUN:"
 
 # Task manager
 ctrl  + shift + Escape

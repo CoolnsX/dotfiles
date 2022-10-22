@@ -19,6 +19,10 @@ require('packer').startup(function(use)
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
     use 'https://gitlab.com/__tpb/monokai-pro.nvim'
     use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig", }
+    use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+}
     --use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lua'
@@ -51,12 +55,12 @@ require("mason-lspconfig").setup {
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'bashls', 'pyright', 'sumneko_lua'}
+local servers = { 'bashls', 'pyright', 'sumneko_lua', 'clangd' , 'html', 'cssls'}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,

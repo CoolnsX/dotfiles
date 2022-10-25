@@ -24,7 +24,11 @@ gtd () {
 
 gtc () { [ -z "$*" ] && [ -p "/dev/stdin" ] && read -r query </dev/stdin || query=$*; git clone "$query"; }
 
-gtr () { [ -z "$*" ] && [ -p "/dev/stdin" ] && read -r query </dev/stdin || query=$*; curl -s "https://api.github.com/users/$query/repos" | sed -nE 's|.*svn_url": "([^"]*)".*|\1|p' | fzf --border --height=10 --layout=reverse; }
+gitf () { [ -z "$*" ] && [ -p "/dev/stdin" ] && read -r query </dev/stdin || query=$*
+    [ -z "$query" ] || curl -s "$(curl -s "$(printf "%s" "$query" | sed 's_github\.com_api\.github\.com/repos_g;s_$_/contents_g')" | sed -nE 's|.*download_url": "([^"]*)".*|\1|p' | fzf --border=rounded --height=10 --layout=reverse)" | bat
+}
+
+gtr () { [ -z "$*" ] && [ -p "/dev/stdin" ] && read -r query </dev/stdin || query=$*; [ -z "$query" ] || curl -s "https://api.github.com/users/$query/repos?per_page=100" | sed -nE 's|.*svn_url": "([^"]*)".*|\1|p' | fzf --border --height=10 --layout=reverse; }
 
 gtu () { [ -z "$*" ] || curl -s "https://api.github.com/search/users?q=$*" | sed -nE 's_.*login": "([^"]*)".*_\1_p' | fzf --layout=reverse --border --height=10; }
 
@@ -44,6 +48,7 @@ export IMAGE="nsxiv"
 alias v="nvim -O"
 alias anime="$HOME/lol/ani-cli"
 alias cp="cp -v"
+alias diff="diff --color -u"
 alias rm="rm -v"
 alias mv="mv -v"
 alias grep="grep --color=auto"
@@ -54,10 +59,12 @@ alias fetch='/bin/*fetch'
 alias ncbb="nvim ~/.config/bspwm/bspwmrc"
 alias ncss="nvim ~/.config/sxhkd/sxhkdrc"
 
+if [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=white,underline
 ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
+fi
 
 clshist
 HISTFILE=~/.histfile
